@@ -7,48 +7,92 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  /* Recoloreamos la escala "neutral" de Tailwind a tonos cálidos: el sitio
+     pasó de fondo oscuro a un crema pastel y los grises fríos por defecto
+     quedaban apagados sobre ese fondo. */
+  tailwind.config = {
+    theme: { extend: { colors: { neutral: {
+      200:'#3b2e29', 300:'#5d4d46', 400:'#7f6f67', 500:'#a8978e', 700:'#ecdfd6', 900:'#f6efe9'
+    } } } }
+  }
+</script>
 <style>
-:root{--accent:#f472b6;--accent2:#ec4899;--mint:#6ee7b7}
+:root{
+  --bg:#fbf1ea;
+  --ink:#33271f;
+  --ink-soft:#6b5a51;
+  --accent:#db2777;
+  --accent-bg:#f472b6;
+  --accent2:#ec4899;
+  --mint:#047857;
+  --mint-bg:#6ee7b7;
+  --card:#fffaf6;
+  --line:#ecdfd6;
+}
 *{font-family:'Plus Jakarta Sans',sans-serif}
 h1,h2,h3{font-family:'Fraunces',serif;letter-spacing:-.015em}
-body{background:#0a0a0a;color:#f0f0f0}
-.glass{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08)}
+body{background:var(--bg);color:var(--ink)}
+.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border:1px solid rgba(255,255,255,.7);box-shadow:0 6px 28px -12px rgba(170,110,135,.28)}
 .accent{color:var(--accent)}
-.accent-bg{background:var(--accent)}
+.accent-bg{background:var(--accent-bg)}
 .mint{color:var(--mint)}
-.btn-primary{background:var(--accent);color:#000;font-weight:700;transition:all .2s;border-radius:12px;padding:14px 28px;border:none;cursor:pointer}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(244,114,182,.6)}
-.card{background:#111;border:1px solid #1f1f1f;border-radius:20px;transition:all .3s}
-.card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.btn-primary{background:var(--accent-bg);color:#2b1420;font-weight:700;transition:all .2s;border-radius:12px;padding:14px 28px;border:none;cursor:pointer;box-shadow:0 10px 28px -10px rgba(219,39,119,.4)}
+.btn-primary:hover{background:var(--accent2);color:#fff;transform:translateY(-2px);box-shadow:0 14px 34px -10px rgba(219,39,119,.55)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;transition:all .3s;box-shadow:0 4px 22px -12px rgba(140,100,90,.16)}
+.card:hover{border-color:var(--accent-bg);transform:translateY(-4px);box-shadow:0 16px 34px -14px rgba(219,39,119,.25)}
 .pulse-dot{display:inline-block;width:8px;height:8px;border-radius:9999px;background:#22c55e;animation:pulse 1.6s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-.opt-btn{background:#161616;border:1px solid #2a2a2a;border-radius:12px;padding:14px 18px;transition:all .2s;cursor:pointer;font-weight:600;color:#d4d4d4;text-align:left}
-.opt-btn:hover{border-color:var(--accent);color:#fff}
-.opt-btn.active{background:var(--accent);color:#000;border-color:var(--accent);box-shadow:0 6px 20px -6px rgba(244,114,182,.7)}
+.opt-btn{background:#fffaf6;border:1px solid var(--line);border-radius:12px;padding:14px 18px;transition:all .2s;cursor:pointer;font-weight:600;color:var(--ink-soft);text-align:left}
+.opt-btn:hover{border-color:var(--accent-bg);color:var(--ink)}
+.opt-btn.active{background:var(--accent-bg);color:#2b1420;border-color:var(--accent-bg);box-shadow:0 6px 20px -6px rgba(244,114,182,.55)}
 .fade-in{animation:fadein .5s ease}
 @keyframes fadein{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 .pop-in{animation:popin .5s cubic-bezier(.34,1.56,.64,1)}
 @keyframes popin{0%{opacity:0;transform:scale(.7) rotate(-6deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-.scoop{border-radius:50%;display:inline-block;box-shadow:inset -8px -10px 20px rgba(0,0,0,.25), 0 6px 14px rgba(0,0,0,.35);}
+.scoop{border-radius:50%;display:inline-block;box-shadow:inset -8px -10px 18px rgba(0,0,0,.12), 0 8px 18px -6px rgba(140,95,110,.28);}
 .stamp{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;}
-.stamp.empty{border:2px dashed #333;color:#333;}
-.stamp.filled{box-shadow:0 6px 16px -4px rgba(244,114,182,.6);}
-.bar-track{background:#1c1c1c;border-radius:9999px;overflow:hidden;height:14px;}
-.bar-fill{background:linear-gradient(90deg,var(--accent),var(--mint));height:100%;border-radius:9999px;transition:width 1s ease;}
+.stamp.empty{border:2px dashed #ddc7ba;color:#ddc7ba;}
+.stamp.filled{box-shadow:0 8px 18px -6px rgba(244,114,182,.55);}
+.bar-track{background:#f1e3d8;border-radius:9999px;overflow:hidden;height:14px;}
+.bar-fill{background:linear-gradient(90deg,var(--accent-bg),var(--mint-bg));height:100%;border-radius:9999px;transition:width 1s ease;}
 ::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-track{background:#0a0a0a}
-::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#e6d3c6;border-radius:8px}
 
 /* VITRINA — scroll reveal 3D (adaptación vanilla del patrón "container scroll") */
 .hero-scroll-track{position:relative;height:220vh}
 .hero-scroll-sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(1.75rem,4vw,3rem);overflow:hidden;padding:2rem 1.5rem}
-.hero-scroll-sticky::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 18%,rgba(244,114,182,.14),transparent 50%),radial-gradient(circle at 85% 85%,rgba(110,231,183,.1),transparent 55%)}
+.hero-scroll-sticky::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 18%,rgba(219,39,119,.14),transparent 50%),radial-gradient(circle at 85% 85%,rgba(4,120,87,.09),transparent 55%)}
 .hero-scroll-header{text-align:center;max-width:46rem;will-change:transform}
-.hero-scroll-card{width:min(74rem,94vw);height:min(36rem,58vh);border:4px solid rgba(108,108,108,.4);border-radius:30px;background:#1c1c1c;padding:.6rem;box-shadow:0 0 #0000004d,0 9px 20px #0000004a,0 37px 37px #00000042,0 84px 50px #00000026,0 149px 60px #0000000a;transform-style:preserve-3d;will-change:transform}
+.hero-scroll-card{width:min(74rem,94vw);height:min(36rem,58vh);border:4px solid rgba(150,115,95,.35);border-radius:30px;background:#2b211c;padding:.6rem;box-shadow:0 0 #0000004d,0 9px 20px #0000004a,0 37px 37px #00000042,0 84px 50px #00000026,0 149px 60px #0000000a;transform-style:preserve-3d;will-change:transform}
 .hero-scroll-card-inner{position:relative;width:100%;height:100%;border-radius:22px;overflow:hidden}
 .hero-scroll-card-inner img{width:100%;height:100%;object-fit:cover;display:block}
 .hero-scroll-card-overlay{position:absolute;inset:auto 0 0 0;padding:1.5rem 1.75rem;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;align-items:flex-end;justify-content:space-between}
 @media(max-width:768px){.hero-scroll-track{height:170vh}.hero-scroll-card{height:min(26rem,52vh)}}
+
+/* LIQUID GLASS — probando el acabado "vidrio líquido" en la tarjeta de fidelidad */
+.liquid-glass{
+  position:relative;overflow:hidden;border-radius:28px;
+  background:linear-gradient(135deg, rgba(255,255,255,.62), rgba(255,255,255,.26));
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:
+    0 24px 70px -24px rgba(190,80,140,.4),
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -16px 36px -20px rgba(255,255,255,.5);
+}
+.liquid-glass::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(125deg, rgba(255,255,255,.55) 0%, transparent 32%, transparent 68%, rgba(255,255,255,.32) 100%);
+  mix-blend-mode:overlay;
+}
+.liquid-glass::after{
+  content:"";position:absolute;top:0;left:10%;right:10%;height:1px;pointer-events:none;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.95), transparent);
+}
+.liquid-glass > *{position:relative}
 </style>
 </head>
 <body class="antialiased">
@@ -61,11 +105,11 @@ body{background:#0a0a0a;color:#f0f0f0}
       <span class="font-extrabold text-xl tracking-tight">Gelato<span class="accent">Hub</span></span>
     </div>
     <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
-      <a href="#quiz" class="hover:text-white transition">Encuentra tu sabor</a>
-      <a href="#vive" class="hover:text-white transition">La vitrina</a>
-      <a href="#sabores" class="hover:text-white transition">Sabores de la semana</a>
-      <a href="#fidelidad" class="hover:text-white transition">Club GelatoHub</a>
-      <a href="#opiniones" class="hover:text-white transition">Opiniones</a>
+      <a href="#quiz" class="hover:text-[var(--ink)] transition">Encuentra tu sabor</a>
+      <a href="#vive" class="hover:text-[var(--ink)] transition">La vitrina</a>
+      <a href="#sabores" class="hover:text-[var(--ink)] transition">Sabores de la semana</a>
+      <a href="#fidelidad" class="hover:text-[var(--ink)] transition">Club GelatoHub</a>
+      <a href="#opiniones" class="hover:text-[var(--ink)] transition">Opiniones</a>
     </div>
     <a href="#quiz" class="btn-primary text-sm">Pide ya 🍦</a>
   </div>
@@ -184,7 +228,7 @@ body{background:#0a0a0a;color:#f0f0f0}
       </div>
 
       <div id="quiz-nav" class="flex justify-between items-center mt-8">
-        <button id="quiz-back" class="text-sm font-semibold text-neutral-400 hover:text-white transition disabled:opacity-0" disabled>← Anterior</button>
+        <button id="quiz-back" class="text-sm font-semibold text-neutral-400 hover:text-[var(--ink)] transition disabled:opacity-0" disabled>← Anterior</button>
         <span class="text-xs text-neutral-500">Elige una opción para continuar</span>
       </div>
     </div>
@@ -192,15 +236,17 @@ body{background:#0a0a0a;color:#f0f0f0}
 </section>
 
 <!-- TARJETA DE FIDELIDAD -->
-<section id="fidelidad" class="py-20 px-6">
+<section id="fidelidad" class="py-20 px-6 relative overflow-hidden">
+  <div class="absolute inset-0 -z-10" style="background:radial-gradient(circle at 14% 20%, rgba(244,114,182,.45), transparent 48%), radial-gradient(circle at 86% 24%, rgba(110,231,183,.4), transparent 50%), radial-gradient(circle at 50% 88%, rgba(251,191,36,.32), transparent 52%);"></div>
   <div class="max-w-4xl mx-auto">
     <div class="text-center mb-12">
       <span class="mint font-bold uppercase tracking-widest text-sm">Club GelatoHub</span>
       <h2 class="text-3xl md:text-5xl font-black mt-2">Tu tarjeta de fidelidad, sin trampas</h2>
       <p class="text-neutral-400 mt-3 max-w-xl mx-auto">Cada tarrina o cucurucho mediano o grande te suma un sello. Junta 10 y el siguiente helado va por la casa. Así de simple.</p>
+      <span class="inline-block mt-3 text-[11px] uppercase tracking-[0.18em] font-bold text-[var(--ink-soft)]">✨ probando un acabado "liquid glass" en esta tarjeta</span>
     </div>
 
-    <div class="card p-8 md:p-10">
+    <div class="liquid-glass p-8 md:p-10">
       <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
         <div>
           <p class="text-sm text-neutral-400">Tarjeta de</p>
@@ -227,7 +273,7 @@ body{background:#0a0a0a;color:#f0f0f0}
       </div>
       <div class="flex items-center justify-between text-sm text-neutral-400 mb-6">
         <span>Progreso del club</span>
-        <span id="loyalty-pct" class="font-bold text-white">0%</span>
+        <span id="loyalty-pct" class="font-bold">0%</span>
       </div>
 
       <div class="glass rounded-2xl px-6 py-4 text-center">
