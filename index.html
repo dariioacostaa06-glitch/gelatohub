@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GelatoHub — Heladería artesanal de barrio en Córdoba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--accent:#f472b6;--accent2:#ec4899;--mint:#6ee7b7}
+*{font-family:'Inter',sans-serif}
+body{background:#0a0a0a;color:#f0f0f0}
+.glass{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08)}
+.accent{color:var(--accent)}
+.accent-bg{background:var(--accent)}
+.mint{color:var(--mint)}
+.btn-primary{background:var(--accent);color:#000;font-weight:700;transition:all .2s;border-radius:12px;padding:14px 28px;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(244,114,182,.6)}
+.card{background:#111;border:1px solid #1f1f1f;border-radius:20px;transition:all .3s}
+.card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.pulse-dot{display:inline-block;width:8px;height:8px;border-radius:9999px;background:#22c55e;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.opt-btn{background:#161616;border:1px solid #2a2a2a;border-radius:12px;padding:14px 18px;transition:all .2s;cursor:pointer;font-weight:600;color:#d4d4d4;text-align:left}
+.opt-btn:hover{border-color:var(--accent);color:#fff}
+.opt-btn.active{background:var(--accent);color:#000;border-color:var(--accent);box-shadow:0 6px 20px -6px rgba(244,114,182,.7)}
+.fade-in{animation:fadein .5s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.pop-in{animation:popin .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes popin{0%{opacity:0;transform:scale(.7) rotate(-6deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+.scoop{border-radius:50%;display:inline-block;box-shadow:inset -8px -10px 20px rgba(0,0,0,.25), 0 6px 14px rgba(0,0,0,.35);}
+.stamp{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.stamp.empty{border:2px dashed #333;color:#333;}
+.stamp.filled{box-shadow:0 6px 16px -4px rgba(244,114,182,.6);}
+.bar-track{background:#1c1c1c;border-radius:9999px;overflow:hidden;height:14px;}
+.bar-fill{background:linear-gradient(90deg,var(--accent),var(--mint));height:100%;border-radius:9999px;transition:width 1s ease;}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#0a0a0a}
+::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:8px}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- NAV -->
+<nav class="fixed top-0 inset-x-0 z-50 glass">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl accent-bg flex items-center justify-center font-black text-black text-lg">GH</div>
+      <span class="font-extrabold text-xl tracking-tight">Gelato<span class="accent">Hub</span></span>
+    </div>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
+      <a href="#quiz" class="hover:text-white transition">Encuentra tu sabor</a>
+      <a href="#sabores" class="hover:text-white transition">Sabores de la semana</a>
+      <a href="#fidelidad" class="hover:text-white transition">Club GelatoHub</a>
+      <a href="#opiniones" class="hover:text-white transition">Opiniones</a>
+    </div>
+    <a href="#quiz" class="btn-primary text-sm">Pide ya 🍦</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="pt-40 pb-24 px-6 relative overflow-hidden">
+  <div class="absolute inset-0 -z-10" style="background:radial-gradient(circle at 18% 25%, rgba(244,114,182,.18), transparent 45%), radial-gradient(circle at 82% 65%, rgba(110,231,183,.12), transparent 50%);"></div>
+  <div class="max-w-5xl mx-auto text-center">
+    <span class="inline-block glass rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide text-neutral-300 mb-6">🍦 Heladería artesanal de barrio · Córdoba capital</span>
+    <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-6">
+      Sabores de autor que <span class="accent">cambian cada semana</span>, hechos a mano a dos calles de tu casa
+    </h1>
+    <p class="text-lg text-neutral-400 max-w-2xl mx-auto mb-10">
+      En GelatoHub batimos cada lote con ingredientes de proximidad y combinaciones que no vas a encontrar en ningún otro sitio. Ven, pruébalas, y únete a un club de fidelidad que de verdad compensa: no puntitos que nunca usas, helados gratis de verdad.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <a href="#quiz" class="btn-primary">Descubre tu sabor ideal</a>
+      <a href="#sabores" class="px-7 py-3.5 rounded-xl border border-neutral-700 font-semibold text-neutral-200 hover:border-neutral-400 transition">Ver sabores de la semana</a>
+    </div>
+    <div class="flex flex-wrap justify-center gap-8 text-sm text-neutral-400">
+      <div class="flex items-center gap-2"><span class="pulse-dot"></span> 6 sabores nuevos esta semana</div>
+      <div class="flex items-center gap-2"><span class="accent font-bold">★ 4.9</span> valoración media (508 reseñas)</div>
+      <div class="flex items-center gap-2">🧊 100% artesanal, sin colorantes</div>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURE ESTRELLA: QUIZ + TARJETA DE FIDELIDAD -->
+<section id="quiz" class="py-20 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="accent font-bold uppercase tracking-widest text-sm">Encuentra tu sabor</span>
+      <h2 class="text-3xl md:text-5xl font-black mt-2">Responde 3 preguntas y te decimos qué pedir</h2>
+      <p class="text-neutral-400 mt-3 max-w-xl mx-auto">Nuestro heladero virtual cruza tus respuestas con la carta de la semana y te chiva el sabor que más te va a enamorar.</p>
+    </div>
+
+    <div class="card p-8 md:p-10">
+      <!-- Barra de progreso del quiz -->
+      <div class="flex items-center gap-2 mb-8">
+        <div class="flex-1 bar-track"><div id="quiz-progress" class="bar-fill" style="width:0%"></div></div>
+        <span id="quiz-step-label" class="text-sm text-neutral-400 font-semibold whitespace-nowrap">Pregunta 1 de 3</span>
+      </div>
+
+      <!-- Preguntas -->
+      <div id="quiz-questions">
+
+        <div class="quiz-q" data-q="0">
+          <h3 class="text-xl md:text-2xl font-bold mb-6">¿Qué buscas hoy?</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button class="opt-btn" data-q="0" data-v="refrescante">🌿 Algo refrescante</button>
+            <button class="opt-btn" data-q="0" data-v="intenso">🔥 Algo intenso</button>
+            <button class="opt-btn" data-q="0" data-v="clasico">🎩 Algo clásico</button>
+            <button class="opt-btn" data-q="0" data-v="atrevido">⚡ Algo atrevido</button>
+          </div>
+        </div>
+
+        <div class="quiz-q hidden" data-q="1">
+          <h3 class="text-xl md:text-2xl font-bold mb-6">¿Cómo te lo tomarías?</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button class="opt-btn" data-q="1" data-v="solo">🥄 Solo, sin nada más</button>
+            <button class="opt-btn" data-q="1" data-v="toppings">🍫 Con toppings</button>
+            <button class="opt-btn" data-q="1" data-v="tarrina">🍨 En tarrina</button>
+            <button class="opt-btn" data-q="1" data-v="cucurucho">🍦 En cucurucho</button>
+          </div>
+        </div>
+
+        <div class="quiz-q hidden" data-q="2">
+          <h3 class="text-xl md:text-2xl font-bold mb-6">¿Qué sabor te pierde?</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button class="opt-btn" data-q="2" data-v="frutal">🍓 Frutal</button>
+            <button class="opt-btn" data-q="2" data-v="chocolate">🍫 Chocolate</button>
+            <button class="opt-btn" data-q="2" data-v="frutossecos">🌰 Frutos secos</button>
+            <button class="opt-btn" data-q="2" data-v="especiado">🌶️ Especiado</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Resultado -->
+      <div id="quiz-result" class="hidden text-center py-6">
+        <p class="mint font-bold uppercase tracking-widest text-sm mb-3">Tu sabor ideal es...</p>
+        <div id="result-emoji" class="text-7xl mb-4"></div>
+        <h3 id="result-name" class="text-2xl md:text-4xl font-black accent mb-4"></h3>
+        <p id="result-desc" class="text-neutral-400 max-w-xl mx-auto mb-8"></p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <button id="quiz-restart" class="btn-primary">Repetir el test</button>
+          <a href="#fidelidad" class="px-7 py-3.5 rounded-xl border border-neutral-700 font-semibold text-neutral-200 hover:border-neutral-400 transition">Ver mi club de fidelidad</a>
+        </div>
+      </div>
+
+      <div id="quiz-nav" class="flex justify-between items-center mt-8">
+        <button id="quiz-back" class="text-sm font-semibold text-neutral-400 hover:text-white transition disabled:opacity-0" disabled>← Anterior</button>
+        <span class="text-xs text-neutral-500">Elige una opción para continuar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARJETA DE FIDELIDAD -->
+<section id="fidelidad" class="py-20 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="mint font-bold uppercase tracking-widest text-sm">Club GelatoHub</span>
+      <h2 class="text-3xl md:text-5xl font-black mt-2">Tu tarjeta de fidelidad, sin trampas</h2>
+      <p class="text-neutral-400 mt-3 max-w-xl mx-auto">Cada tarrina o cucurucho mediano o grande te suma un sello. Junta 10 y el siguiente helado va por la casa. Así de simple.</p>
+    </div>
+
+    <div class="card p-8 md:p-10">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <div>
+          <p class="text-sm text-neutral-400">Tarjeta de</p>
+          <p class="text-xl font-extrabold">María — socia desde marzo</p>
+        </div>
+        <span class="glass rounded-full px-4 py-1.5 text-xs font-semibold text-neutral-300">6 / 10 sellos</span>
+      </div>
+
+      <div class="grid grid-cols-5 sm:grid-cols-10 gap-3 mb-8">
+        <div class="stamp filled accent-bg text-black">🍦</div>
+        <div class="stamp filled accent-bg text-black">🍦</div>
+        <div class="stamp filled accent-bg text-black">🍦</div>
+        <div class="stamp filled accent-bg text-black">🍦</div>
+        <div class="stamp filled accent-bg text-black">🍦</div>
+        <div class="stamp filled accent-bg text-black">🍦</div>
+        <div class="stamp empty">+</div>
+        <div class="stamp empty">+</div>
+        <div class="stamp empty">+</div>
+        <div class="stamp empty">+</div>
+      </div>
+
+      <div class="bar-track mb-3">
+        <div id="loyalty-bar" class="bar-fill" style="width:0%"></div>
+      </div>
+      <div class="flex items-center justify-between text-sm text-neutral-400 mb-6">
+        <span>Progreso del club</span>
+        <span id="loyalty-pct" class="font-bold text-white">0%</span>
+      </div>
+
+      <div class="glass rounded-2xl px-6 py-4 text-center">
+        <p class="font-bold text-lg">¡Te faltan 4 sellos para tu helado gratis! 🎉</p>
+        <p class="text-neutral-400 text-sm mt-1">Cada visita cuenta. Pide en mostrador y enseña tu tarjeta digital para sumar sello al instante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO DE SABORES -->
+<section id="sabores" class="py-20 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="accent font-bold uppercase tracking-widest text-sm">Carta de la semana</span>
+      <h2 class="text-3xl md:text-5xl font-black mt-2">Sabores de autor que rotan cada 7 días</h2>
+      <p class="text-neutral-400 mt-3 max-w-xl mx-auto">Nada de cartas eternas: cada semana batimos combinaciones nuevas con lo mejor de temporada. Esto es lo que hay esta semana en el mostrador.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="card p-6">
+        <div class="scoop w-20 h-20 mb-5 flex items-center justify-center text-3xl" style="background:linear-gradient(145deg,#fcd9e8,#f472b6)">🍓</div>
+        <h3 class="font-bold text-lg mb-1">Fresón de Palma del Río & Albahaca</h3>
+        <p class="text-neutral-400 text-sm mb-4">Fresón de temporada macerado con un toque de albahaca fresca. Dulce, herbal y sorprendentemente ligero.</p>
+        <span class="text-xs glass rounded-full px-3 py-1 text-neutral-300">🌿 Frutal · Refrescante</span>
+      </div>
+
+      <div class="card p-6">
+        <div class="scoop w-20 h-20 mb-5 flex items-center justify-center text-3xl" style="background:linear-gradient(145deg,#d8c2ff,#a78bfa)">🌰</div>
+        <h3 class="font-bold text-lg mb-1">Pistacho & Miel de Azahar</h3>
+        <p class="text-neutral-400 text-sm mb-4">Pistacho tostado a baja temperatura con un hilo de miel de azahar de la sierra. Cremoso, elegante y con cuerpo.</p>
+        <span class="text-xs glass rounded-full px-3 py-1 text-neutral-300">🌰 Frutos secos · Clásico con giro</span>
+      </div>
+
+      <div class="card p-6">
+        <div class="scoop w-20 h-20 mb-5 flex items-center justify-center text-3xl" style="background:linear-gradient(145deg,#3a2418,#7c4a2d)">🍫</div>
+        <h3 class="font-bold text-lg mb-1">Higo Negro con Toffee</h3>
+        <p class="text-neutral-400 text-sm mb-4">Higos negros confitados en su punto exacto, nadando en un toffee casero hecho a fuego lento. Intenso de verdad.</p>
+        <span class="text-xs glass rounded-full px-3 py-1 text-neutral-300">🍫 Intenso · Para compartir (o no)</span>
+      </div>
+
+      <div class="card p-6">
+        <div class="scoop w-20 h-20 mb-5 flex items-center justify-center text-3xl" style="background:linear-gradient(145deg,#ffd9a0,#f59e0b)">🌶️</div>
+        <h3 class="font-bold text-lg mb-1">Mango-Maracuyá Picante</h3>
+        <p class="text-neutral-400 text-sm mb-4">Mango y maracuyá con un toque final de chile suave que despierta el paladar. Tropical, atrevido y adictivo.</p>
+        <span class="text-xs glass rounded-full px-3 py-1 text-neutral-300">⚡ Atrevido · Edición limitada</span>
+      </div>
+
+      <div class="card p-6">
+        <div class="scoop w-20 h-20 mb-5 flex items-center justify-center text-3xl" style="background:linear-gradient(145deg,#cdeede,#6ee7b7)">🌿</div>
+        <h3 class="font-bold text-lg mb-1">Yogur de Cabra & Lima</h3>
+        <p class="text-neutral-400 text-sm mb-4">Yogur de cabra de granja cordobesa con ralladura de lima fresca. Ácido, suave y perfecto para los días de calor.</p>
+        <span class="text-xs glass rounded-full px-3 py-1 text-neutral-300">🌿 Refrescante · Sin gluten</span>
+      </div>
+
+      <div class="card p-6">
+        <div class="scoop w-20 h-20 mb-5 flex items-center justify-center text-3xl" style="background:linear-gradient(145deg,#e6d2ba,#c4956a)">🎩</div>
+        <h3 class="font-bold text-lg mb-1">Vainilla Bourbon de la Casa</h3>
+        <p class="text-neutral-400 text-sm mb-4">Nuestra base clásica, infusionada con vaina de vainilla bourbon natural. El que nunca falla, hecho como debe ser.</p>
+        <span class="text-xs glass rounded-full px-3 py-1 text-neutral-300">🎩 Clásico · El más pedido</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRUEBA SOCIAL -->
+<section id="opiniones" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="mint font-bold uppercase tracking-widest text-sm">Lo que dice el barrio</span>
+      <h2 class="text-3xl md:text-5xl font-black mt-2">Cuatro cucharadas de opinión sincera</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+      <div class="card p-6 text-center">
+        <p class="text-3xl font-black accent mb-1">4.9 ★</p>
+        <p class="text-sm text-neutral-400">valoración media en Google</p>
+      </div>
+      <div class="card p-6 text-center">
+        <p class="text-3xl font-black accent mb-1">+12.000</p>
+        <p class="text-sm text-neutral-400">tarrinas servidas este año</p>
+      </div>
+      <div class="card p-6 text-center">
+        <p class="text-3xl font-black accent mb-1">38</p>
+        <p class="text-sm text-neutral-400">sabores de autor probados en 2026</p>
+      </div>
+      <div class="card p-6 text-center">
+        <p class="text-3xl font-black accent mb-1">2.300+</p>
+        <p class="text-sm text-neutral-400">socios en el Club GelatoHub</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-6">
+        <p class="text-neutral-300 mb-4">"Voy cada viernes a ver qué sabor nuevo han sacado y nunca, NUNCA me han decepcionado. El de higo con toffee me cambió la vida."</p>
+        <p class="font-bold text-sm">— Lucía R. <span class="text-neutral-500 font-normal">· vecina del Centro</span></p>
+      </div>
+      <div class="card p-6">
+        <p class="text-neutral-300 mb-4">"Hice el quiz por probar y acertaron de pleno: me salió el de pistacho y miel de azahar y ahora es mi pedido fijo. Brujería pura."</p>
+        <p class="font-bold text-sm">— Javier M. <span class="text-neutral-500 font-normal">· Ciudad Jardín</span></p>
+      </div>
+      <div class="card p-6">
+        <p class="text-neutral-300 mb-4">"El club de fidelidad de verdad funciona, no es de mentira como en otros sitios. Ya me he comido tres helados gratis este año."</p>
+        <p class="font-bold text-sm">— Carmen S. <span class="text-neutral-500 font-normal">· Fuensanta</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="py-20 px-6">
+  <div class="max-w-4xl mx-auto card p-12 text-center relative overflow-hidden">
+    <div class="absolute inset-0 -z-10" style="background:radial-gradient(circle at 30% 30%, rgba(244,114,182,.18), transparent 55%), radial-gradient(circle at 75% 70%, rgba(110,231,183,.14), transparent 55%);"></div>
+    <h2 class="text-3xl md:text-5xl font-black mb-4">¿Vienes a probar el sabor de esta semana?</h2>
+    <p class="text-neutral-400 max-w-xl mx-auto mb-8">Te esperamos en el local con la cuchara de pruebas lista. Y si nos sigues en redes, te avisamos en cuanto sale el sabor nuevo cada viernes.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#quiz" class="btn-primary">Hacer el quiz de sabores</a>
+      <a href="#fidelidad" class="px-7 py-3.5 rounded-xl border border-neutral-700 font-semibold text-neutral-200 hover:border-neutral-400 transition">Unirme al club</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 px-6 border-t border-neutral-900">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg accent-bg flex items-center justify-center font-black text-black text-xs">GH</div>
+      <span class="font-semibold text-neutral-300">GelatoHub</span> — heladería artesanal · Córdoba
+    </div>
+    <p>Calle de las Flores, esquina con Plaza de las Tendillas · Abierto de 12:00 a 23:00</p>
+    <p>© 2026 GelatoHub. Hecho a mano, batido con cariño.</p>
+  </div>
+</footer>
+
+<script>
+// ---------- QUIZ "ENCUENTRA TU SABOR" ----------
+const answers = [null, null, null];
+let currentQ = 0;
+const totalQ = 3;
+
+const questions = document.querySelectorAll('.quiz-q');
+const progressBar = document.getElementById('quiz-progress');
+const stepLabel = document.getElementById('quiz-step-label');
+const backBtn = document.getElementById('quiz-back');
+const resultBox = document.getElementById('quiz-result');
+const quizNav = document.getElementById('quiz-nav');
+const restartBtn = document.getElementById('quiz-restart');
+
+const results = {
+  // refrescante combos
+  'refrescante|solo|frutal':      { emoji:'🍓', name:'Fresón de Palma del Río & Albahaca', desc:'Tú vas a lo limpio: fruta de temporada, un puntito herbal y nada que distraiga. Fresco, ligero y directo al corazón.' },
+  'refrescante|toppings|frutal':  { emoji:'🥭', name:'Mango-Maracuyá con Crujiente de Coco', desc:'Frescor tropical con una capa crujiente que lo cambia todo. Para quien quiere textura y sabor a partes iguales.' },
+  'refrescante|tarrina|especiado':{ emoji:'🌶️', name:'Mango-Maracuyá Picante', desc:'Refrescante con un giro inesperado: un toque de chile suave que despierta cada cucharada. Atrevido pero con cabeza.' },
+  // intenso combos
+  'intenso|cucurucho|chocolate':  { emoji:'🍫', name:'Higo Negro con Toffee', desc:'Sabor con personalidad: higos confitados nadando en un toffee casero a fuego lento. No apto para indecisos.' },
+  'intenso|toppings|chocolate':   { emoji:'🍪', name:'Chocolate Intenso & Galleta Quemada', desc:'Chocolate con cuerpo de verdad, rematado con trocitos de galleta tostada al punto. Una declaración de intenciones.' },
+  'intenso|solo|frutossecos':     { emoji:'🌰', name:'Pistacho & Miel de Azahar', desc:'Cremoso, profundo y con ese toque floral de la miel de azahar de sierra. El sabor que pides cuando ya sabes lo que quieres.' },
+  // clasico combos
+  'clasico|cucurucho|chocolate':  { emoji:'🎩', name:'Vainilla Bourbon & Virutas de Chocolate', desc:'El combo de toda la vida, hecho como mandan los cánones: vaina natural y chocolate de verdad. Aciertas siempre.' },
+  'clasico|tarrina|frutossecos':  { emoji:'🌰', name:'Turrón de Jijona Artesano', desc:'Un homenaje al turrón blando, batido a mano con almendra tostada. Clásico con mayúsculas, cremoso hasta decir basta.' },
+  'clasico|solo|frutal':          { emoji:'🍋', name:'Limón de Huerta Cordobesa', desc:'Sencillo, ácido y de toda la vida: limón recién exprimido y nada más. El que nunca pasa de moda.' },
+  // atrevido combos
+  'atrevido|cucurucho|especiado': { emoji:'🌶️', name:'Mango-Maracuyá Picante', desc:'Para quien busca emociones fuertes en cada lametón: tropical, vibrante y con un final que pica de verdad.' },
+  'atrevido|toppings|frutossecos':{ emoji:'🥜', name:'Caramelo Salado & Cacahuete Tostado', desc:'Dulce, salado y crujiente al mismo tiempo: una montaña rusa de sabor que no vas a olvidar fácilmente.' },
+  'atrevido|tarrina|chocolate':   { emoji:'🌋', name:'Chocolate con Guindilla de Cristal', desc:'Chocolate negro intenso con un chispazo picante al final. No es para todo el mundo... pero a ti te va a encantar.' },
+};
+
+const fallback = { emoji:'🍨', name:'Higo Negro con Toffee', desc:'Nuestra combinación estrella de esta temporada: dulzura profunda, un puntito ahumado y una textura que se deshace en la boca. Va sobre seguro.' };
+
+function updateProgress(){
+  const pct = Math.round((currentQ / totalQ) * 100);
+  progressBar.style.width = pct + '%';
+  stepLabel.textContent = currentQ < totalQ ? `Pregunta ${currentQ + 1} de ${totalQ}` : 'Completado';
+}
+
+function showQuestion(i){
+  questions.forEach(q => q.classList.add('hidden'));
+  resultBox.classList.add('hidden');
+  quizNav.classList.remove('hidden');
+  const target = document.querySelector(`.quiz-q[data-q="${i}"]`);
+  if (target){
+    target.classList.remove('hidden');
+    target.classList.add('fade-in');
+  }
+  backBtn.disabled = i === 0;
+  updateProgress();
+}
+
+document.querySelectorAll('.opt-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const q = parseInt(btn.dataset.q, 10);
+    const v = btn.dataset.v;
+    answers[q] = v;
+
+    // marca visualmente la opción elegida dentro de esa pregunta
+    document.querySelectorAll(`.opt-btn[data-q="${q}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // avanza tras una pequeña pausa para que se vea la selección
+    setTimeout(() => {
+      if (q < totalQ - 1){
+        currentQ = q + 1;
+        showQuestion(currentQ);
+      } else {
+        currentQ = totalQ;
+        revealResult();
+      }
+    }, 320);
+  });
+});
+
+backBtn.addEventListener('click', () => {
+  if (currentQ > 0){
+    currentQ -= 1;
+    showQuestion(currentQ);
+  }
+});
+
+function revealResult(){
+  questions.forEach(q => q.classList.add('hidden'));
+  quizNav.classList.add('hidden');
+  updateProgress();
+
+  const key = answers.join('|');
+  const result = results[key] || fallback;
+
+  document.getElementById('result-emoji').textContent = result.emoji;
+  document.getElementById('result-name').textContent = result.name;
+  document.getElementById('result-desc').textContent = result.desc;
+
+  resultBox.classList.remove('hidden');
+  resultBox.classList.remove('pop-in');
+  void resultBox.offsetWidth; // reinicia animación
+  resultBox.classList.add('pop-in');
+}
+
+restartBtn.addEventListener('click', () => {
+  answers[0] = answers[1] = answers[2] = null;
+  currentQ = 0;
+  document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+  showQuestion(0);
+});
+
+showQuestion(0);
+
+// ---------- TARJETA DE FIDELIDAD ----------
+window.addEventListener('DOMContentLoaded', () => {
+  const bar = document.getElementById('loyalty-bar');
+  const pct = document.getElementById('loyalty-pct');
+  requestAnimationFrame(() => {
+    bar.style.width = '60%';
+    pct.textContent = '60%';
+  });
+});
+</script>
+
+</body>
+</html>
